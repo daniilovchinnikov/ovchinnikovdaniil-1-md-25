@@ -1,0 +1,115 @@
+def z1():
+    class Restaurant:
+        def __init__(self, restaurant_name, cuisine_type, rating=0):
+            self.restaurant_name = restaurant_name
+            self.cuisine_type = cuisine_type
+            self.rating = rating
+
+        def describe_restaurant(self):
+            print(
+                f"Ресторан {self.restaurant_name} специализируется на кухне {self.cuisine_type}. Рейтинг: {self.rating}")
+
+    class IceCreamStand(Restaurant):
+        def __init__(self, restaurant_name, cuisine_type, flavors, rating=0):
+            super().__init__(restaurant_name, cuisine_type, rating)
+            self.flavors = flavors
+
+        def display_flavors(self):
+            print("Список доступных вкусов мороженого:")
+            for flavor in self.flavors:
+                print(flavor)
+
+    ice_cream_stand = IceCreamStand("Gelateria", "кафе-мороженое", ["ваниль", "шоколад", "клубничное", "фисташковое"],
+                                    rating=4)
+    ice_cream_stand.describe_restaurant()
+    print()
+    ice_cream_stand.display_flavors()
+
+def z2():
+    class Restaurant:
+        def __init__(self, restaurant_name, cuisine_type, rating=0):
+            self.restaurant_name = restaurant_name
+            self.cuisine_type = cuisine_type
+            self.rating = rating
+
+        def describe_restaurant(self):
+            print(f"Ресторан '{self.restaurant_name}' предлагает {self.cuisine_type}. Рейтинг: {self.rating}")
+
+    class IceCreamStand(Restaurant):
+        def __init__(self, restaurant_name, cuisine_type, flavors, location, hours, rating=0):
+            super().__init__(restaurant_name, cuisine_type, rating)
+            self.flavors = flavors
+            self.location = location
+            self.hours = hours
+
+        def display_flavors(self):
+            print("Список доступных вкусов мороженого:")
+            for flavor in self.flavors:
+                print(flavor)
+
+        def add_flavor(self, new_flavor):
+            self.flavors.append(new_flavor)
+            print(f"Новый вкус мороженого '{new_flavor}' добавлен!")
+
+        def remove_flavor(self, flavor):
+            if flavor in self.flavors:
+                self.flavors.remove(flavor)
+                print(f"Вкус '{flavor}' успешно удален!")
+            else:
+                print(f"Вкус '{flavor}' не найден в списке.")
+
+        def check_flavor(self, flavor):
+            if flavor in self.flavors:
+                print(f"Вкус '{flavor}' доступен.")
+            else:
+                print(f"Вкус '{flavor}' отсутствует в списке.")
+
+        def serve_ice_cream_on_stick(self):
+            print("Мороженое на палочке подается!")
+
+        def serve_soft_serve_ice_cream(self):
+            print("Мягкое мороженое готово к подаче!")
+
+    ice_cream_stand = IceCreamStand("Gelateria", "кафе-мороженое", ["ваниль", "шоколад", "клубничное", "фисташковое"],
+                                    "ул. Летняя, 10", "с 10:00 до 22:00", rating=4)
+    ice_cream_stand.describe_restaurant()
+    print()
+    ice_cream_stand.display_flavors()
+    ice_cream_stand.add_flavor("карамель")
+    ice_cream_stand.remove_flavor("шоколад")
+    ice_cream_stand.check_flavor("ваниль")
+    ice_cream_stand.check_flavor("шоколад")
+    ice_cream_stand.serve_ice_cream_on_stick()
+    ice_cream_stand.serve_soft_serve_ice_cream()
+def z3():
+    import tkinter as tk
+
+    class IceCreamStand:
+        def __init__(self, flavors):
+            self.flavors = flavors
+
+            self.root = tk.Tk()
+            self.root.title("Ice Cream Stand")
+
+            self.label = tk.Label(self.root, text="Выберите вкус мороженого:")
+            self.label.pack()
+
+            self.flavor_var = tk.StringVar(self.root)
+            self.flavor_var.set(self.flavors[0])
+
+            self.flavor_dropdown = tk.OptionMenu(self.root, self.flavor_var, *self.flavors)
+            self.flavor_dropdown.pack()
+
+            self.order_button = tk.Button(self.root, text="Заказать", command=self.place_order)
+            self.order_button.pack()
+
+        def place_order(self):
+            selected_flavor = self.flavor_var.get()
+            print(f"Заказан вкус мороженого: {selected_flavor}")
+
+        def run(self):
+            self.root.mainloop()
+
+    flavors_list = ["ваниль", "шоколад", "клубничное", "фисташковое"]
+    ice_cream_stand = IceCreamStand(flavors_list)
+    ice_cream_stand.run()
